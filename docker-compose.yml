@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  web:
+    container_name: books-app
+    restart: always
+    build: .
+    ports:
+      - "5000:3000"
+    links:
+      - mongo
+    volumes:
+      - .:/user/src/app
+  mongo:
+    container_name: books-database
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes: 
+      - ./db_data:/data/db
+    logging:
+      driver: none
